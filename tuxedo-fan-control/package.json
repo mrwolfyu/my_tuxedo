@@ -1,0 +1,116 @@
+{
+    "name": "tuxedofancontrol",
+    "version": "0.1.8",
+    "homepage": "https://tuxedocomputers.com",
+    "author": {
+        "name": "Christian Loritz / TUXEDO Computers GmbH",
+        "email": "tux@tuxedocomputers.com",
+        "url": "https://tuxedocomputers.com"
+    },
+    "description": "Control the Fan Speed (CPU and GPU) of your TUXEDO Notebook Device",
+    "private": true,
+    "main": "./output/dist/electronmain.js",
+    "scripts": {
+        "build-gyp": "node-gyp rebuild",
+        "build": "npm run clean && node-gyp rebuild && ng build --base-href . && ts-node ./scripts/build.ts",
+        "build:prod": "npm run clean && node-gyp rebuild && ng build --prod --base-href . && ts-node ./scripts/build.ts",
+        "start": "electron ./output/dist/",
+        "pack": "npm run build && electron-builder",
+        "pack:prod": "npm run build:prod && electron-builder",
+        "clean": "rm -rf ./bin && rm -rf ./build && rm -rf ./output && rm -rf ./dist"
+    },
+    "build": {
+        "appId": "com.tuxedo.tuxedofancontrol",
+        "productName": "tuxedofancontrol",
+        "copyright": "copyright © 2019 TUXEDO Computers GmbH",
+        "icon": "./data/32x32.png",
+        "directories": {
+            "output": "./output/build"
+        },
+        "files": [
+            "./output/dist/**/*"
+        ],
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb",
+                "snap",
+                "tar.gz",
+                "rpm"
+            ],
+            "category": "System",
+            "description": "Control the Fan Speed (CPU and GPU) of your TUXEDO Notebook Device"
+        },
+        "appImage": {
+            "systemIntegration": "doNotAsk"
+        },
+        "deb": {
+            "depends": [
+                "xvfb"
+            ],
+            "category": "System",
+            "fpm": [
+                "--after-install=./scripts/after_install.sh",
+                "--before-remove=./scripts/before_remove.sh"
+            ]
+        },
+        "rpm": {
+            "depends": [
+                "xorg-x11-Xvfb"
+            ],
+            "fpm": [
+                "--after-install=./scripts/after_install.sh",
+                "--before-remove=./scripts/before_remove.sh"
+            ]
+        }
+    },
+    "dependencies": {
+        "@angular/animations": "^7.2.15",
+        "@angular/common": "^7.2.15",
+        "@angular/compiler": "^7.2.15",
+        "@angular/core": "^7.2.15",
+        "@angular/forms": "^7.2.15",
+        "@angular/http": "^7.2.15",
+        "@angular/platform-browser": "^7.2.15",
+        "@angular/platform-browser-dynamic": "^7.2.15",
+        "@angular/router": "^7.2.15",
+        "bindings": "^1.5.0",
+        "bootstrap": "^4.3.1",
+        "core-js": "^2.6.5",
+        "jquery": "^3.4.1",
+        "node-addon-api": "^1.6.3",
+        "popper.js": "^1.15.0",
+        "rxjs": "^6.5.2",
+        "zone.js": "^0.8.29"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^0.13.9",
+        "@angular/cli": "^7.3.9",
+        "@angular/compiler-cli": "^7.2.15",
+        "@angular/language-service": "^7.2.15",
+        "@types/bootstrap": "^4.3.0",
+        "@types/jasmine": "^3.3.12",
+        "@types/jasminewd2": "^2.0.6",
+        "@types/jquery": "^3.3.29",
+        "@types/node": "^10.14.6",
+        "codelyzer": "~4.5.0",
+        "electron": "^4.2.1",
+        "electron-builder": "^20.41.0",
+        "jasmine-core": "~3.3.0",
+        "jasmine-spec-reporter": "~4.2.1",
+        "karma": "^4.1.0",
+        "karma-chrome-launcher": "~2.2.0",
+        "karma-coverage-istanbul-reporter": "^2.0.5",
+        "karma-jasmine": "~2.0.1",
+        "karma-jasmine-html-reporter": "^1.4.2",
+        "protractor": "^5.4.2",
+        "ts-node": "~7.0.1",
+        "tslint": "~5.11.0",
+        "typescript": "~3.1.6"
+    },
+    "contributors": [
+        {
+            "name": "Christian Loritz"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+.entrytitlespan {
+    width: 175px;
+    margin-right: 5px;
+}
+
+#openModalButton {
+    margin-left: -13px;
+    margin-top: -7px;
+}
+
+.entrycontainer {
+    display: flex;
+    min-width: 365px;
+}
+
+.infodiv {
+    margin-left: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.servicefileactions {
+    margin-top: 20px;
+}
+
+.servicefileactions > button { 
+    margin-left: 15px;
+}
